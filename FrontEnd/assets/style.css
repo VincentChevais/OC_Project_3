@@ -46,18 +46,28 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
+
 body {
-	max-width: 1140px;
-	margin:auto;
+	max-width: 1440px;
+	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 150px 140px 150px;
 }
+
+
+main {
+	margin: 0 245px;
+}
+
 section {
 	margin: 50px 0
 }
@@ -75,7 +85,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -84,6 +93,12 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -93,14 +108,17 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
+	margin-bottom: 140px;
 }
 #introduction figure {
 	flex: 1
@@ -112,42 +130,81 @@ li:hover {
 }
 
 #introduction article {
-	flex: 1
+	flex: 0.8;
 }
 #introduction h2 {
-	margin-bottom: 1em;
+	margin-bottom: 19px;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
-}
-#portfolio h2 {
-	text-align: center;
 	margin-bottom: 1em;
 }
+#portfolio h2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.6em;
+}
+
+#filters {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	padding-block: 50px;
+}
+
+#filters button {
+	color:#1D6154;
+	background-color: white;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	font-size: 1em;
+	font-family: 'Syne';
+	padding: 9px;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+	min-width: 100px;
+}
+
+#filters button:hover, #filters .selected  {
+	color: white;
+	background-color: #1D6154;
+}
+
+
 .gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+	grid-column-gap: 18px;
+	grid-row-gap: 16px;
 }
 
 .gallery img {
 	width: 100%;
 
 }
+
+.gallery figcaption {
+	margin-top: 7px;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
 }
+
 #contact > * {
 	text-align: center;
 
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -156,14 +213,14 @@ margin: auto;
 }
 
 #contact input {
-	height: 50px;
-	font-size: 1.2em;
+	height: 36px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -178,6 +235,7 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	cursor: pointer;
 }
 
 footer nav ul {
@@ -186,3 +244,108 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Page Login */
+
+.login-container {
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	max-height: 1024px;
+}
+
+.login-nav {
+	font-weight: 600;
+}
+
+#login-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#login {
+	font-size: 14px;
+	width: 379px;
+	display: flex;
+	flex-direction: column;	
+	align-items: center;
+}
+
+.form-container {
+	display: flex;
+	justify-content: center;
+}
+
+#login label {
+	margin-bottom: 7px;
+	align-self: flex-start;
+}
+
+#login input {
+	width: 379px;
+	height: 51px;
+	margin-bottom: 35px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+#login input[type=submit] {
+	font-family: 'Work Sans';
+	font-weight: 500;
+	width: 179px;
+	height: 36px;
+	border: none;
+	margin-bottom: 30px
+}
+
+#login p{
+	text-decoration: underline;
+	color: #3D3D3D;
+	margin-bottom: 250px;
+
+}
+
+.error-message-container {
+	display: none;
+	border: none;
+	width: 379px;
+	height: 70px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	align-items: center;
+	justify-content: center;
+
+}
+
+/* Modale */
+
+.edition {
+	display:none;
+}
+
+.edition-bar {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+	width: 100%;
+	height: 60px;
+	font-size: 16px;
+	background-color: #000;
+	color: white;
+}
+
+.edition-bar i {
+	font-weight: 400;
+}
+
+.modal-trigger button  {
+	display: flex;
+	border: none;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	color: #000;
+	background-color: #FFFEF8;
+	align-items: center;
+	gap: 0.8em;
+	cursor: pointer;
+}
