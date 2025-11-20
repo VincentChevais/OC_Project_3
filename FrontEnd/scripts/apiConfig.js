@@ -95,3 +95,66 @@ export async function postLogin(email, password) {
     return { success: false, message: "Erreur de connexion au serveur." };
   }
 }
+
+export async function deleteWork(id) {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('La session a expiré ou le work est introuvable.');
+    }
+
+    // >>> Faire un nouveau GET pour mettre à jour les works
+    const refreshed = await fetch('http://localhost:5678/api/works');
+    const works = await refreshed.json();
+
+    sessionStorage.setItem("works", JSON.stringify(works));
+
+    return works;
+    
+  } catch (error) {
+    console.error(`Erreur lors de la suppression du work :`, error);
+    return null;
+  }
+}
+
+export async function addWork(formData) {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("Vous devez être connecté·e.");
+
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Impossible d'ajouter le work.");
+    }
+
+    // Retourne le work ajouté
+    const newWork = await response.json();
+
+    // Mettre à jour le sessionStorage avec le nouveau work
+    const works = JSON.parse(sessionStorage.getItem("works")) || [];
+    works.push(newWork);
+    sessionStorage.setItem("works", JSON.stringify(works));
+
+    return newWork;
+
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du work :", error);
+    return null;
+  }
+}

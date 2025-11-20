@@ -50,8 +50,12 @@ table {
 /** end reset css**/
 
 body {
-	max-width: 1440px;
-	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	
+	
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background-color: #FFFEF8;
@@ -310,16 +314,15 @@ footer nav ul {
 	border: none;
 	width: 379px;
 	height: 70px;
-	box-shadow: 0px 4px 14px 0px #00000017;
 	align-items: center;
 	justify-content: center;
 
 }
 
-/* Modale */
+/* Edition & Modale */
 
 .edition {
-	display:none;
+	display: none;
 }
 
 .edition-bar {
@@ -334,8 +337,9 @@ footer nav ul {
 	color: white;
 }
 
-.edition-bar i {
+.edition-bar .modal-trigger {
 	font-weight: 400;
+	cursor: pointer;
 }
 
 .modal-trigger button  {
@@ -348,4 +352,227 @@ footer nav ul {
 	align-items: center;
 	gap: 0.8em;
 	cursor: pointer;
+}
+
+.modal-container {
+	visibility: hidden;
+	transition: visibility 0.4s;;
+}
+
+.modal-container.active {
+	visibility: visible;
+
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	transition: opacity 0.4s 0.2s ease-out;
+}
+
+.modal-container.active .overlay {
+	opacity: 1;
+	transition: opacity 0.4s ease-out;
+}
+
+.modal {
+	width: 95%;
+	max-width: 630px;
+	min-width: 300px;
+	padding: 45px;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, calc(-50% - 50px));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+#delete-modal {
+	display: flex;
+}
+
+#add-modal {
+	display: none;
+}
+
+.modal-container.active .modal {
+	opacity: 1;
+	transform: translate(-50%, -50%);
+	transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
+}
+
+.close-modal {
+	border: none;
+	background-color: #FFFFFF;
+	position: absolute;
+	top: 26px;
+	right: 30px;
+	cursor: pointer;
+}
+
+.close-modal .fa-xmark {
+	font-size: 24px;
+}
+
+#arrowReturn {
+	font-size: 24px;
+	position: absolute;
+	top: 26px;
+	left: 30px;
+	cursor: pointer;
+}
+
+.modal-title {
+	font-family: 'Work Sans';
+	font-size: 26px;
+	color: #000;
+	font-weight: 400;
+	padding-block: 15px 45px;
+}
+
+.modal-gallery {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	column-gap: 9px;
+	row-gap: 29px;
+	width: 420px;
+	border-bottom: 1px solid #B3B3B3;
+	padding-bottom: 65px;
+}
+
+.modal-gallery img{
+	height: 103px;
+}
+
+.modal-gallery .trash {
+	cursor: pointer;
+	position: absolute;
+	margin-top: 5px;
+	margin-left: -20px;
+	background-color: black;
+	color: white;
+	border-radius: 2px;
+	border: 3px solid black;
+	font-size: .8em;
+	
+}
+
+.modal .modal-btn {
+	margin: 38px 0 0 0;
+	border: none;
+	width: 237px;
+	padding: 10px 49px;
+}
+
+.modal-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal .add-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	width: 420px;
+	height: 170px;
+}
+
+.upload-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.upload-content p {
+	margin-bottom: 20px;
+}
+
+#addIconPhoto {
+	font-size: 60px;
+	color: #B9C5CC;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.upload-button {
+	display: inline-block;
+	background: #CBD6DC;
+	color: #306685;
+	padding: 10px 20px;
+	border-radius: 50px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.modal-form p {
+	font-size: 10px;
+	color: #444;
+}
+
+.img-preview {
+	display: none;
+	width: 130px;
+	height: 100%;
+	max-height: 170px;
+	object-fit: cover;
+}
+
+.modal-form label {
+	margin-bottom: 10px;;
+}
+
+.label-form {
+	align-self: flex-start;
+}
+
+
+.modal-form input,
+.modal-form select {
+	width: 420px;
+	height: 40px;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+.modal-form #titre {
+	margin-bottom: 20px;
+}
+
+.border-form {
+	display: flex;
+	width: 420px;
+	flex-direction: column;
+	margin-top: 10px;
+	padding-bottom: 47px;
+	border-bottom: 1px solid #B3B3B3;
+}
+
+.submit-btn {
+  background: #A7A7A7;
+  font-family: 'Syne';
+  color: white;
+  border-radius: 60px;
+  cursor: not-allowed;
+}
+
+.submit-btn.active {
+  background: #1D6154;
+  cursor: pointer;
 }
