@@ -75,7 +75,7 @@ modaleSecondPage.addEventListener('click', () => {
 }
 
 
-// Aperçu image modale
+// Gestion upload Image
 const imageInput = document.getElementById("image-input");
 const uploadContent = document.querySelector(".upload-content");
 const imagePreview = document.getElementById("img-preview");
@@ -86,11 +86,28 @@ if (imageInput&&uploadContent&&imagePreview&&titleInput&&categorySelect) {
         const file = imageInput.files[0];
         if (!file) return;
 
+        // Validation taille Image
+         const maxSize = 4 * 1024 * 1024; // 4Mo en octets
+        if (file.size > maxSize) {
+            alert("Le fichier est trop volumineux. Taille maximum : 4Mo");
+            imageInput.value = ""; // Réinitialise l'input
+            return; // Arrête l'exécution
+        }
+
+        // Validation type Image
+        const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+        if (!validTypes.includes(file.type)) {
+            alert("Format non supporté. Utilisez JPG ou PNG uniquement.");
+            imageInput.value = ""; // Réinitialise l'input
+            return; // Arrête l'exécution
+        }
+
+        //Prévisualisation si tout est OK
         const reader = new FileReader();
         reader.onload = (e) => {
             imagePreview.src = e.target.result;
-            imagePreview.style.display = "block";
-            uploadContent.style.display = "none"; // cacher la zone bleue
+            imagePreview.style.display = "block"; // afficher l'image
+            uploadContent.style.display = "none"; // cacher le formulaire d'image
         };
         reader.readAsDataURL(file);
 
