@@ -54,8 +54,6 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	
-	
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background-color: #FFFEF8;
@@ -66,7 +64,6 @@ header {
 	justify-content: space-between;
 	margin: 50px 150px 140px 150px;
 }
-
 
 main {
 	margin: 0 245px;
@@ -249,13 +246,6 @@ footer nav ul {
 }
 
 /* Page Login */
-
-.login-container {
-	display: flex;
-	flex-direction: column;
-	gap: 50px;
-	max-height: 1024px;
-}
 
 .login-nav {
 	font-weight: 600;

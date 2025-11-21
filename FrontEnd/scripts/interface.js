@@ -143,7 +143,7 @@ export function toggleModal() {
     const secondPage = document.getElementById("add-modal");
 
     if (isOpening) {
-        // 👉 On ouvre la modale : on revient toujours à la page 1
+        // On ouvre la modale : on revient toujours à la page 1
         firstPage.style.display = "flex";
         secondPage.style.display = "none";
 

@@ -1,16 +1,16 @@
 // apiConfig.js
 
-// // Base URL configurable via variable d'environnement
-// const BASE_URL = process.env.API_URL || 'http://localhost:5678/api';
-// // Endpoints centralisés
-// const ENDPOINTS = {
-//   WORKS: '/works',
-//   LOGIN: '/users/login',
-//   CATEGORIES: '/categories'
-// };
-// // Fonction utilitaire pour construire l'URL complète
-// const getEndpoint = (endpoint) => `${BASE_URL}${endpoint}`;
-// export { BASE_URL, ENDPOINTS, getEndpoint };
+//  Base URL configurable via variable d'environnement
+ const BASE_URL = 'http://localhost:5678/api';
+//  Endpoints centralisés
+ const ENDPOINTS = {
+   WORKS: '/works',
+   LOGIN: '/users/login',
+   CATEGORIES: '/categories'
+ };
+ // Fonction utilitaire pour construire l'URL complète
+ const getEndpoint = (endpoint) => `${BASE_URL}${endpoint}`;
+
 
 //Récupération Work API
     //Charge les works depuis le SessionStorage
@@ -27,7 +27,7 @@ export async function getWorks() {
             return storedWorks;
         }
 
-        const r = await fetch('http://localhost:5678/api/works', {
+        const r = await fetch(getEndpoint(ENDPOINTS.WORKS), {
             method: 'GET',
             headers: {
                 "Accept": "application/json",
@@ -54,7 +54,7 @@ export async function getWorks() {
 
 export async function getCategories() {
     try {
-        const r = await fetch('http://localhost:5678/api/categories', {
+        const r = await fetch(getEndpoint(ENDPOINTS.CATEGORIES), {
             method: 'GET',
             headers: {
                 "Accept": "application/json",
@@ -73,7 +73,7 @@ export async function getCategories() {
 
 export async function postLogin(email, password) {
   try {
-    const response = await fetch("http://localhost:5678/api/users/login", {
+    const response = await fetch(getEndpoint(ENDPOINTS.LOGIN), {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -101,7 +101,7 @@ export async function deleteWork(id) {
     const token = localStorage.getItem("token");
     if (!token) return null;
 
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    const response = await fetch(`${getEndpoint(ENDPOINTS.WORKS)}/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -112,8 +112,8 @@ export async function deleteWork(id) {
       throw new Error('La session a expiré ou le work est introuvable.');
     }
 
-    // >>> Faire un nouveau GET pour mettre à jour les works
-    const refreshed = await fetch('http://localhost:5678/api/works');
+    // Faire un nouveau GET pour mettre à jour les works
+    const refreshed = await fetch(getEndpoint(ENDPOINTS.WORKS));
     const works = await refreshed.json();
 
     sessionStorage.setItem("works", JSON.stringify(works));
@@ -131,7 +131,7 @@ export async function addWork(formData) {
     const token = localStorage.getItem("token");
     if (!token) throw new Error("Vous devez être connecté·e.");
 
-    const response = await fetch("http://localhost:5678/api/works", {
+    const response = await fetch(getEndpoint(ENDPOINTS.WORKS), {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`, 
@@ -145,9 +145,11 @@ export async function addWork(formData) {
 
     // Retourne le work ajouté
     const newWork = await response.json();
-
+    //ParseInt pour permettre aux filtres de fonctionner avec les newWorks
+    newWork.categoryId = parseInt(newWork.categoryId, 10);
     // Mettre à jour le sessionStorage avec le nouveau work
     const works = JSON.parse(sessionStorage.getItem("works")) || [];
+    
     works.push(newWork);
     sessionStorage.setItem("works", JSON.stringify(works));
 

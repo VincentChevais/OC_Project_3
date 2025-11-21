@@ -119,10 +119,10 @@ if(form) {
     formData.append("image", imageInput.files[0]);
     formData.append("title", titleInput.value.trim());
     formData.append("category", categorySelect.value); // categoryId
-
+    
     // Appel à l'API
     const newWork = await addWork(formData);
-
+       
     if (newWork) {
         // Mettre à jour la galerie principale et la modale
         const works = JSON.parse(sessionStorage.getItem("works"));
@@ -131,8 +131,6 @@ if(form) {
 
         // Réinitialiser le formulaire
         resetModal();
-        // Fermer la modale
-        toggleModal();
     }
     });
 }

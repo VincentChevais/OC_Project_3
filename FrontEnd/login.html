@@ -9,19 +9,19 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="./scripts/main.js" defer></script>
+	<script type="module" src="./scripts/main.js"></script>
 </head>
-<body class="login-container">
+<body>
     <header>
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
             <ul>
                 <li><a href="index.html#portfolio">projets</a></li>
                 <li><a href="index.html#contact">contact</a></li>
-                <li class="login-nav"><a href="#">login</a></li>
+                <li class="login-nav"><a href="login.html" aria-label="Refresh the login page">login</a></li>
                 <li>
 				<a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-					<img src="./assets/icons/instagram.png" alt="Instagram">
+					<img src="./assets/icons/instagram.png" alt="Lien vers Instagram de Sophie Bluel">
 				</a>
 			</li>
             </ul>
@@ -35,10 +35,10 @@
             <form id="login" method="post" autocomplete="on">
                 
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" autocomplete="on">
+                <input type="email" name="email" id="email"required autocomplete="email">
                 <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password" autocomplete="current-password">
-                <div class="error-message-container"></div>
+                <input type="password" name="password" id="password" required autocomplete="current-password">
+                <div class="error-message-container" aria-live="assertive"></div>
                 <input type="submit" value="Se connecter">
                 <p><a href="#">Mot de passe oublié</a></p>
             </form>
