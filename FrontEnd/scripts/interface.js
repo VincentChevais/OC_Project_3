@@ -52,7 +52,7 @@ export async function displayFilters() {
 
     filterButtons.innerHTML = ""
     
-    if (window.sessionStorage.getItem("token")) {
+    if (window.localStorage.getItem("token")) {
         filterButtons.style.display = "none";
         return;
     }

@@ -125,7 +125,7 @@ if(form) {
        
     if (newWork) {
         // Mettre à jour la galerie principale et la modale
-        const works = JSON.parse(sessionStorage.getItem("works"));
+        const works = JSON.parse(localStorage.getItem("works"));
         displayWorks(works);       // galerie principale
         displayWorksModale(works); // galerie modale
 

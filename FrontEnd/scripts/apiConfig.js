@@ -13,16 +13,16 @@
 
 
 //Récupération Work API
-    //Charge les works depuis le SessionStorage
+    //Charge les works depuis le LocalStorage
         //Retourne les works en mémoire
     //Sinon, charge les works depuis l'API avec Fetch
-        //Sauvegarde les works chargés dans le SessionStorage
+        //Sauvegarde les works chargés dans le LocalStorage
         //Retourne les works
     //Lance Erreur si statut !== 200
 
 export async function getWorks() {
     try {
-        const storedWorks = JSON.parse(window.sessionStorage.getItem("works"));
+        const storedWorks = JSON.parse(window.localStorage.getItem("works"));
         if (storedWorks){
             return storedWorks;
         }
@@ -38,7 +38,7 @@ export async function getWorks() {
             throw new Error ('Impossible de contacter le serveur/works')
         }
         const works = await r.json();
-        window.sessionStorage.setItem("works", JSON.stringify(works));
+        window.localStorage.setItem("works", JSON.stringify(works));
         return works
 
     } catch(error) {
@@ -116,7 +116,7 @@ export async function deleteWork(id) {
     const refreshed = await fetch(getEndpoint(ENDPOINTS.WORKS));
     const works = await refreshed.json();
 
-    sessionStorage.setItem("works", JSON.stringify(works));
+    localStorage.setItem("works", JSON.stringify(works));
 
     return works;
     
@@ -147,11 +147,11 @@ export async function addWork(formData) {
     const newWork = await response.json();
     //ParseInt pour permettre aux filtres de fonctionner avec les newWorks
     newWork.categoryId = parseInt(newWork.categoryId, 10);
-    // Mettre à jour le sessionStorage avec le nouveau work
-    const works = JSON.parse(sessionStorage.getItem("works")) || [];
+    // Mettre à jour le localStorage avec le nouveau work
+    const works = JSON.parse(localStorage.getItem("works")) || [];
     
     works.push(newWork);
-    sessionStorage.setItem("works", JSON.stringify(works));
+    localStorage.setItem("works", JSON.stringify(works));
 
     return newWork;
 
