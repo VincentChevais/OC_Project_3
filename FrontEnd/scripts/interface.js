@@ -1,17 +1,15 @@
-import {getWorks, getCategories, deleteWork} from "./apiConfig.js";
+import { getWorks, getCategories, deleteWork } from "./apiConfig.js";
 
 
 /* Affichage de la gallerie de travaux (Works) dans la page.
-*
-*   Récupère un Array de works
-*   Crée dynamiquement les éléments HTML pour les afficher dans la div.gallery.
-*   Si aucun tableau n’est fourni en argument, elle appelle getWorks()
-*   pour récupérer les travaux depuis le localStorage ou l’API.
+*     Récupère un Array de works
+*     Crée dynamiquement les éléments HTML pour les afficher dans la div.gallery.
+*     Si aucun tableau n’est fourni en argument, elle appelle getWorks()
+*     pour récupérer les travaux depuis le localStorage ou l’API.
 */
 export async function displayWorks(work) {
-
   // Récupère la div qui contiendra les travaux
-  const gallery = document.querySelector(".gallery"); 
+  const gallery = document.querySelector(".gallery");
   if (!gallery) return; // Sort si la galerie n'existe pas dans le DOM
 
   // Utilise le tableau fourni ou récupère les travaux via getWorks()
@@ -19,7 +17,7 @@ export async function displayWorks(work) {
   gallery.innerHTML = ""; // Réinitialise le contenu de la galerie pour éviter les doublons
 
   // Parcourt chaque work pour créer les éléments HTML correspondants
-  works.forEach(({imageUrl, title, categoryId}) => {
+  works.forEach(({ imageUrl, title, categoryId }) => {
     // Crée un <figure> pour chaque work et lui associe la catégorie
     const newWork = document.createElement("figure");
     newWork.dataset.id = categoryId; // stockage de l'id de catégorie pour filtrage
@@ -49,24 +47,23 @@ export async function displayWorks(work) {
 *   Crée dynamiquement un bouton pour chaque catégorie
 */
 export async function displayFilters() {
-
   // Récupère le conteneur des filtres
   const filterButtons = document.getElementById("filters");
   if (!filterButtons) return; // Sort si le conteneur n'existe pas
 
   // Récupère les catégories depuis l'API
   let categories = await getCategories();
-  if(!categories) return; // Sort si aucune catégorie n'est trouvée
+  if (!categories) return; // Sort si aucune catégorie n'est trouvée
 
   // Réinitialise le contenu pour éviter doublons
   filterButtons.innerHTML = "";
-    
+
   // Si l’utilisateur est connecté, on masque les filtres
   const token = localStorage.getItem("token");
   if (token) {
     filterButtons.style.display = "none"; // masque les filtres
     const gallery = document.querySelector(".gallery");
-    if(gallery) gallery.style.marginTop = "90px"; // ajuste l'espace de la galerie
+    if (gallery) gallery.style.marginTop = "90px"; // ajuste l'espace de la galerie
     return;
   }
 
@@ -78,7 +75,7 @@ export async function displayFilters() {
   filterButtons.appendChild(allCategoriesButton);
 
   // Crée un bouton pour chaque catégorie récupérée
-  categories.forEach(({name, id}) => {
+  categories.forEach(({ name, id }) => {
     const newFilter = document.createElement("button");
     newFilter.dataset.id = id; // id de la catégorie pour le filtrage
     newFilter.innerText = name; // nom affiché sur le bouton
@@ -92,7 +89,6 @@ export async function displayFilters() {
 * Applique un style CSS
 */
 export function displayError(message) {
-
   // Sélection du conteneur d'erreur
   const container = document.querySelector(".error-message-container");
   if (!container) return;
@@ -102,7 +98,7 @@ export function displayError(message) {
   if (oldError) oldError.remove();
 
   // Si aucun message n'est fourni, on ne fait rien
-  if (!message) return; 
+  if (!message) return;
 
   // Création du nouvel élément d'erreur
   const errorDiv = document.createElement("div");
@@ -126,7 +122,6 @@ export function displayError(message) {
 *  Rappel : l'affichage des filtres est géré dans displayFilters
 */
 export function toggleEdition() {
-
   // Vérifie si un token est présent => mode édition activé
   const token = localStorage.getItem("token");
   const isEditor = !!token; // true si token présent
@@ -154,7 +149,6 @@ export function toggleEdition() {
 *   Ouvre et ferme la modale en gérant les deux pages internes
 */
 export function toggleModal() {
-
   // Selection de la modale
   const modalContainer = document.querySelector(".modal-container");
   if (!modalContainer) return; // Sécurité
@@ -169,18 +163,18 @@ export function toggleModal() {
   const firstPage = document.getElementById("delete-modal");
   const secondPage = document.getElementById("add-modal");
 
-    if (isOpening) {
-        // On ouvre la modale : on revient par défaut à la page 1
-        firstPage.style.display = "flex";
-        secondPage.style.display = "none";
+  if (isOpening) {
+    // On ouvre la modale : on revient par défaut à la page 1
+    firstPage.style.display = "flex";
+    secondPage.style.display = "none";
 
-        // Charge la liste des catégories dans le select
-        categoriesSelect();
+    // Charge la liste des catégories dans le select
+    categoriesSelect();
 
-    } else {
-        // On ferme la modale : on reset le formulaire de la page 2
-        resetModal();
-    }
+  } else {
+    // On ferme la modale : on reset le formulaire de la page 2
+    resetModal();
+  }
 }
 
 /* Gestion Pages modale
@@ -189,7 +183,6 @@ export function toggleModal() {
 */
 
 export function showModalPage(pageIdToShow) {
-
   // On récupère les deux pages
   const pages = document.querySelectorAll(".modal");
   if (!pages.length) return; // Sécurité : aucune page trouvée
@@ -198,7 +191,7 @@ export function showModalPage(pageIdToShow) {
     // Affiche la page ciblée
     if (page.id === pageIdToShow) {
       page.style.display = 'flex';
-    } 
+    }
     // Masque l'autre page
     else {
       page.style.display = 'none';
@@ -216,9 +209,8 @@ export function showModalPage(pageIdToShow) {
 *       si succès, recharge la modale et la galerie principale avec les données mises à jour.
 */
 export async function displayWorksModale(work) {
-
   // Récupère le conteneur de la galerie dans la modale
-  const modalGallery = document.querySelector(".modal-gallery"); 
+  const modalGallery = document.querySelector(".modal-gallery");
   if (!modalGallery) return; // Sécurité : quitte si l'élément n'existe pas
 
   // Utilise le tableau fourni ou récupère les works via l'API / sessionStorage
@@ -228,7 +220,7 @@ export async function displayWorksModale(work) {
   modalGallery.innerHTML = "";
 
   // Parcours des works pour construire le DOM
-  works.forEach(({imageUrl, title, id, categoryId}) => {
+  works.forEach(({ imageUrl, title, id, categoryId }) => {
 
     // Création du conteneur <figure> et stockage des metadata
     const newWork = document.createElement("figure");
@@ -273,7 +265,6 @@ export async function displayWorksModale(work) {
 *  avec les catégories fournies par l'API
 */
 export async function categoriesSelect() {
-
   // Récupère l'élément <select> où seront ajoutées les catégories
   const select = document.getElementById("categorie");
 
@@ -286,7 +277,7 @@ export async function categoriesSelect() {
 
     // Pour chaque catégorie récupérée...
     categories.forEach(cat => {
-      const option = document.createElement("option"); // On crée un élément <option>
+      const option = document.createElement("option"); // Crée un élément <option>
       option.value = cat.id; // Valeur envoyée dans le formulaire
       option.textContent = cat.name; // Texte affiché dans la liste déroulante
       select.appendChild(option); // Ajoute l'option au <select>
@@ -300,9 +291,8 @@ export async function categoriesSelect() {
 
 /* Vérifie si le formulaire d'ajout de la modale page 2 est rempli
 *  La vérification de taille et de type d'image sont faites dans lors de l'ajout d'image
-*/ 
+*/
 export function checkFormValidity() {
-
   // Récupération des champs du formulaire
   const imageInput = document.getElementById("image-input"); // Input de l'image uploadée
   const titleInput = document.getElementById("titre"); // Champ texte du titre
@@ -315,15 +305,15 @@ export function checkFormValidity() {
     titleInput.value.trim() !== '' && // Le titre n'est pas vide 
     categorySelect.value; // - Une catégorie est choisie
 
-    if (isValid) {
-      // On active le bouton de validation
-      submitBtn.disabled = false;
-      submitBtn.classList.add("active");
-    } else {
-      // On désactive le bouton de validation
-      submitBtn.disabled = true;
-      submitBtn.classList.remove("active");
-    }
+  if (isValid) {
+    // On active le bouton de validation
+    submitBtn.disabled = false;
+    submitBtn.classList.add("active");
+  } else {
+    // On désactive le bouton de validation
+    submitBtn.disabled = true;
+    submitBtn.classList.remove("active");
+  }
 }
 
 /* Réinitialisation de tous les champs de la modale page 2
@@ -331,7 +321,6 @@ export function checkFormValidity() {
 * ou retour en arrière à la page 1
 */
 export function resetModal() {
-
   // Récupération des éléments dans le DOM
   const imageInput = document.getElementById("image-input");
   const imagePreview = document.getElementById("img-preview");
@@ -348,7 +337,7 @@ export function resetModal() {
   imagePreview.style.display = "none";
 
   // Réafficher la zone d’upload (bleue)
-  uploadContent.style.display = "flex"; 
+  uploadContent.style.display = "flex";
 
   // Réinitialiser les inputs texte / select
   titleInput.value = "";

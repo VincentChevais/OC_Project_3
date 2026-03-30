@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,25 +91,44 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -54,7 +141,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	font-size: 14px;
 	background-color: #FFFEF8;
 }
@@ -73,7 +160,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -82,13 +169,13 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
@@ -106,6 +193,7 @@ nav ul {
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -121,9 +209,11 @@ li:hover {
 	align-items: center;
 	margin-bottom: 140px;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -133,6 +223,7 @@ li:hover {
 #introduction article {
 	flex: 0.8;
 }
+
 #introduction h2 {
 	margin-bottom: 19px;
 }
@@ -140,6 +231,7 @@ li:hover {
 #introduction p {
 	margin-bottom: 1em;
 }
+
 #portfolio h2 {
 	display: flex;
 	justify-content: center;
@@ -156,7 +248,7 @@ li:hover {
 }
 
 #filters button {
-	color:#1D6154;
+	color: #1D6154;
 	background-color: white;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
@@ -169,7 +261,8 @@ li:hover {
 	min-width: 100px;
 }
 
-#filters button:hover, #filters .selected  {
+#filters button:hover,
+#filters .selected {
 	color: white;
 	background-color: #1D6154;
 }
@@ -194,21 +287,21 @@ li:hover {
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 
-#contact > * {
+#contact>* {
 	text-align: center;
 
 }
 
-#contact h2{
+#contact h2 {
 	margin-bottom: 20px;
 }
 
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -218,6 +311,7 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
@@ -227,15 +321,15 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 	cursor: pointer;
 }
 
@@ -261,7 +355,7 @@ footer nav ul {
 	font-size: 14px;
 	width: 379px;
 	display: flex;
-	flex-direction: column;	
+	flex-direction: column;
 	align-items: center;
 }
 
@@ -292,7 +386,7 @@ footer nav ul {
 	margin-bottom: 30px
 }
 
-#login p{
+#login p {
 	text-decoration: underline;
 	color: #3D3D3D;
 	margin-bottom: 250px;
@@ -332,7 +426,7 @@ footer nav ul {
 	cursor: pointer;
 }
 
-.modal-trigger button  {
+.modal-trigger button {
 	display: flex;
 	border: none;
 	font-family: 'Work Sans';
@@ -346,7 +440,8 @@ footer nav ul {
 
 .modal-container {
 	visibility: hidden;
-	transition: visibility 0.4s;;
+	transition: visibility 0.4s;
+	;
 }
 
 .modal-container.active {
@@ -441,7 +536,7 @@ footer nav ul {
 	padding-bottom: 65px;
 }
 
-.modal-gallery img{
+.modal-gallery img {
 	height: 103px;
 }
 
@@ -455,7 +550,7 @@ footer nav ul {
 	border-radius: 2px;
 	border: 3px solid black;
 	font-size: .8em;
-	
+
 }
 
 .modal .modal-btn {
@@ -510,6 +605,7 @@ footer nav ul {
 	font-size: 14px;
 	cursor: pointer;
 }
+
 .modal-form p {
 	font-size: 10px;
 	color: #444;
@@ -524,7 +620,8 @@ footer nav ul {
 }
 
 .modal-form label {
-	margin-bottom: 10px;;
+	margin-bottom: 10px;
+	;
 }
 
 .label-form {
@@ -555,14 +652,14 @@ footer nav ul {
 }
 
 .submit-btn {
-  background: #A7A7A7;
-  font-family: 'Syne';
-  color: white;
-  border-radius: 60px;
-  cursor: not-allowed;
+	background: #A7A7A7;
+	font-family: 'Syne';
+	color: white;
+	border-radius: 60px;
+	cursor: not-allowed;
 }
 
 .submit-btn.active {
-  background: #1D6154;
-  cursor: pointer;
+	background: #1D6154;
+	cursor: pointer;
 }
