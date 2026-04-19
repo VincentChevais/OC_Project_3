@@ -251,7 +251,6 @@ export async function displayWorksModale(work) {
         displayWorksModale(updatedWorks);
         displayWorks(updatedWorks);
       }
-      // ICI AJOUTER UNE GESTION ERREUR SI SUPPRESSION ECHOUE GEREE PAR DISPLAYERROR ?
     });
 
     // Assemblage DOM 

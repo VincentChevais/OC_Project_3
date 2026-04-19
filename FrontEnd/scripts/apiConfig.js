@@ -102,7 +102,7 @@ export async function postLogin(email, password) {
     // Si la requête échoue (identifiants invalides)
     if (!r.ok) {
       // Retourne un objet indiquant succès false et message
-      return { success: false, message: "Identifiants incorrects." };
+      return { success: false, message: "Identifiant ou mot de passe incorrects." };
     }
 
     // Récupération des données de réponse (token)
